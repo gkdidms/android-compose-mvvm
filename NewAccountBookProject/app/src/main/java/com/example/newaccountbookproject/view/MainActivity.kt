@@ -9,10 +9,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Observer
 import com.example.newaccountbookproject.R
 import com.example.newaccountbookproject.base.BaseActivity
 import com.example.newaccountbookproject.databinding.ActivityMainBinding
@@ -39,7 +41,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
         ) {
             Column() {
                 MainCircularProgressAnimated()
-                MainButton()
             }
         }
     }
@@ -49,15 +50,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
     @Composable
     private fun MainCircularProgressAnimated() {
         val progressValue = 0.75f
-//        val infiniteTransition = rememberInfiniteTransition()
-        var progress by remember {
-            mutableStateOf(0.0f)
-        }
+//        val infiniteTransition = rememberInfiniteTransition() 무한대로 동작하는 애니메이션
+
+        //데이터 변화를 감지하는 ?? liveData로 어떻게 변형하지 ?
+        val progress: Float by viewModel.progressNum.observeAsState(0.0f)
 
         //react effect 와 동일함. activity가 실행될때 최초 실행됨.
-        LaunchedEffect(Unit) {
-            progress = 0.7f
-        }
+//        LaunchedEffect(Unit) {
+//            progress = 0.7f
+//        }
 
         val progressAnimation by animateFloatAsState(
             targetValue = progress,
@@ -69,19 +70,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
             color = Color.Blue
         )
 
-        Button(onClick = {
-                         progress = (0 until 100).random().toFloat() / 100
-        },
+        Button(
+            onClick = {},
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color.Blue
             )) {
             Text(text = "버튼입니다.", color = Color.White)
         }
-    }
-
-    @Composable
-    private fun MainButton() {
-
     }
 
     @Composable
