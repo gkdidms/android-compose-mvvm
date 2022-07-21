@@ -21,7 +21,7 @@ import com.example.newaccountbookproject.databinding.ActivityMainBinding
 import com.example.newaccountbookproject.model.MainViewModel
 import com.example.newaccountbookproject.view.ui.theme.NewAccountBookProjectTheme
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.activity_main) {
+class MainActivity : BaseActivity<MainViewModel>() {
 
     override val viewModel: MainViewModel by viewModels() //의존성 주입
 
@@ -45,11 +45,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
         }
     }
 
-
-
     @Composable
     private fun MainCircularProgressAnimated() {
-        val progressValue = 0.75f
 //        val infiniteTransition = rememberInfiniteTransition() 무한대로 동작하는 애니메이션
 
         //데이터 변화를 감지하는 ?? liveData로 어떻게 변형하지 ?
@@ -64,6 +61,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(R.layout.a
             targetValue = progress,
             animationSpec = tween(1000)
         )
+
         CircularProgressIndicator(
             progress = progressAnimation,
             strokeWidth = 5.dp,

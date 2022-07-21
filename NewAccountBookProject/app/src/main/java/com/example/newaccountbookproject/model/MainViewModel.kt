@@ -14,7 +14,4 @@ class MainViewModel: BaseViewModel() {
         _progressNum.value = 0.7f
     }
 
-
-
-
 }
