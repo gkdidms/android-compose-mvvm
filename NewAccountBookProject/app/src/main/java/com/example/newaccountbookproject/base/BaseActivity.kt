@@ -9,14 +9,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
 //제너릭 문법 공부 필요
-abstract class BaseActivity<R: BaseViewModel>() : ComponentActivity() {
-
+abstract class BaseActivity<R: BaseViewModel> : ComponentActivity() {
 
     abstract val viewModel: R
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     fun showToastMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

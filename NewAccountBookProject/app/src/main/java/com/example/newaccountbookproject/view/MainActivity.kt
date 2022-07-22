@@ -4,12 +4,11 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -62,11 +61,18 @@ class MainActivity : BaseActivity<MainViewModel>() {
             animationSpec = tween(1000)
         )
 
-        CircularProgressIndicator(
-            progress = progressAnimation,
-            strokeWidth = 5.dp,
-            color = Color.Blue
-        )
+        Box() {
+            CircularProgressIndicator(
+                progress = progressAnimation,
+                strokeWidth = 10.dp,
+                color = Color.Blue,
+                modifier = Modifier.fillMaxWidth().wrapContentHeight()
+            )
+            Text(
+                text = "70%",
+                modifier = Modifier.align(Alignment.Center).padding(vertical = 10.dp),
+            )
+        }
 
         Button(
             onClick = {},
