@@ -1,4 +1,4 @@
-package com.example.newaccountbookproject.model
+package com.example.newaccountbookproject.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
