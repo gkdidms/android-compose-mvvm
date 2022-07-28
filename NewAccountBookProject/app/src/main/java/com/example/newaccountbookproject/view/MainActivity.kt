@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.newaccountbookproject.base.BaseActivity
 import com.example.newaccountbookproject.viewmodel.MainViewModel
 import com.example.newaccountbookproject.view.ui.theme.NewAccountBookProjectTheme
@@ -19,7 +20,8 @@ import com.example.newaccountbookproject.view.ui.theme.NewAccountBookProjectThem
 class MainActivity : BaseActivity<MainViewModel>() {
 
     override val viewModel: MainViewModel by viewModels() //의존성 주입
-
+    private val key = "b3a487cd4400b8bb9805b40d9df5ec60"
+    private val targetDt = "20220728"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -27,6 +29,11 @@ class MainActivity : BaseActivity<MainViewModel>() {
                 MainView()
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getMoveList(key, targetDt)
     }
 
     @Composable
@@ -37,18 +44,19 @@ class MainActivity : BaseActivity<MainViewModel>() {
             //RecyclerView 같은거임
             LazyColumn() {
                 //MainCircularProgressAnimated()
-                items(10) {
-                    MainItem()
+                val num = viewModel.dailyBoxOfficeList.value?.size ?: 10
+                items(num) {
+                    MainItem(it)
                 }
             }
         }
     }
 
     @Composable
-    private fun MainItem() {
+    private fun MainItem(num: Int) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            Text(text = "이름")
-            Text(text = "비밀번호")
+            Text(text = viewModel.dailyBoxOfficeList.value?.get(num)?.rnum ?: "데이터 없음")
+            Text(text = viewModel.dailyBoxOfficeList.value?.get(num)?.movieNm ?: "데이터 없음")
         }
     }
 

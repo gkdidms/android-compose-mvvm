@@ -12,7 +12,7 @@ class MyApplication:Application() {
 
     //전역변수
     companion object {
-        lateinit var retrofit: Retrofit
+        lateinit var sRetrofit: Retrofit
     }
 
 
@@ -27,7 +27,7 @@ class MyApplication:Application() {
             .connectTimeout(5000, TimeUnit.SECONDS)
             .build()
 
-        retrofit = Retrofit.Builder()
+        sRetrofit = Retrofit.Builder()
             .baseUrl(BASE_API)
             .client(okHttp)
             .addConverterFactory(GsonConverterFactory.create())
