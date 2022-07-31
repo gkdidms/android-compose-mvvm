@@ -1,5 +1,6 @@
 package com.example.newaccountbookproject.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -28,6 +29,7 @@ class MainViewModel: BaseViewModel() {
                 val response = repository.getMovieList(key, targetDt)
                 response.let {
                     if (it.isSuccessful) {
+                        Log.e("response", it.body()?.boxOfficeResult?.dailyBoxOfficeList.toString())
                         _dailyBoxOfficeList.value = it.body()?.boxOfficeResult?.dailyBoxOfficeList
                     } else{
                         print(it.message())

@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 class MyApplication:Application() {
 
-    val BASE_API = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+    val BASE_API = "https://www.kobis.or.kr"
 
     //전역변수
     companion object {

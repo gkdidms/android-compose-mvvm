@@ -33,7 +33,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.getMoveList(key, targetDt)
+        viewModel.getMoveList(key=key, targetDt=targetDt)
     }
 
     @Composable
