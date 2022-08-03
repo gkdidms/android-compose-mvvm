@@ -9,9 +9,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.newaccountbookproject.base.BaseActivity
 import com.example.newaccountbookproject.viewmodel.MainViewModel
@@ -22,10 +24,12 @@ class MainActivity : BaseActivity<MainViewModel>() {
     override val viewModel: MainViewModel by viewModels() //의존성 주입
     private val key = "b3a487cd4400b8bb9805b40d9df5ec60"
     private val targetDt = "20220728"
+    var num: Int = 10
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             NewAccountBookProjectTheme() {
+                num = viewModel.dailyBoxOfficeList.observeAsState().value?.size ?: 10
                 MainView()
             }
         }
@@ -44,7 +48,7 @@ class MainActivity : BaseActivity<MainViewModel>() {
             //RecyclerView 같은거임
             LazyColumn() {
                 //MainCircularProgressAnimated()
-                val num = viewModel.dailyBoxOfficeList.value?.size ?: 10
+
                 items(num) {
                     MainItem(it)
                 }
